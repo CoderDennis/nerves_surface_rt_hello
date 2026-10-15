@@ -80,7 +80,7 @@ wifi_config =
   end
 
 config :vintage_net,
-  regulatory_domain: "00",
+  regulatory_domain: "SE",
   config: [
     {"eth0",
      %{
