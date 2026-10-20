@@ -56,6 +56,9 @@ config :nerves_ssh,
 # The Surface RT's USB port is host-only, so there's no usb0 gadget
 # interface. eth0 is for a USB Ethernet adapter.
 #
+# The Wi-Fi interface is mlan0, not wlan0: that's the name the Marvell
+# mwifiex driver gives it.
+#
 # Wi-Fi is configured at build time when NERVES_WIFI_SSID is set, e.g.:
 #
 #   NERVES_WIFI_SSID=MyNetwork NERVES_WIFI_PSK=secret mix firmware
@@ -87,7 +90,7 @@ config :vintage_net,
        type: VintageNetEthernet,
        ipv4: %{method: :dhcp}
      }},
-    {"wlan0", wifi_config}
+    {"mlan0", wifi_config}
   ]
 
 config :mdns_lite,
