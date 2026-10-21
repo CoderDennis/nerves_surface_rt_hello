@@ -47,16 +47,27 @@ defmodule NervesSurfaceRtHello.MixProject do
       {:nerves_pack, "~> 0.7.1", targets: @all_targets},
 
       # Dependencies for specific targets
-      # Use the local checkout of the system next to this repo, to test
-      # system changes before they're released. `compile: true` builds it
-      # (in Docker on macOS) when it changes. To use a release instead:
-      # github: "CoderDennis/nerves_system_surface_rt", tag: "v0.2.0"
-      {:nerves_system_surface_rt,
-       path: "../nerves_system_surface_rt",
-       runtime: false,
-       targets: :surface_rt,
-       nerves: [compile: true]}
+      system_dep()
     ]
+  end
+
+  # The released Surface RT system, which comes with a prebuilt system
+  # artifact. To test system changes before they're released, set
+  # SURFACE_RT_SYSTEM_PATH to a local checkout of the system. It's then
+  # built from source (in Docker on macOS) whenever it changes.
+  defp system_dep do
+    case System.get_env("SURFACE_RT_SYSTEM_PATH") do
+      nil ->
+        {:nerves_system_surface_rt,
+         github: "CoderDennis/nerves_system_surface_rt",
+         tag: "v0.2.0",
+         runtime: false,
+         targets: :surface_rt}
+
+      path ->
+        {:nerves_system_surface_rt,
+         path: path, runtime: false, targets: :surface_rt, nerves: [compile: true]}
+    end
   end
 
   def release do

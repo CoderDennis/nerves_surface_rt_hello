@@ -24,23 +24,19 @@ Surface RT can't boot from microSD, so the first install isn't a plain
 [jailbreak](https://github.com/CoderDennis/nerves_system_surface_rt#part-1-jailbreak-the-surface-rt)
 and [installing](https://github.com/CoderDennis/nerves_system_surface_rt#installing).
 
-This app uses the system from a local checkout next to it, so that system
-changes can be tested before they're released. Clone both into the same
-directory:
+Clone the app and build firmware for the `surface_rt` target:
 
 ```sh
-git clone https://github.com/CoderDennis/nerves_system_surface_rt.git
 git clone https://github.com/CoderDennis/nerves_surface_rt_hello.git
 cd nerves_surface_rt_hello
 ```
 
-Then build firmware for the `surface_rt` target:
-
   * `export MIX_TARGET=surface_rt`, or prefix every command with
     `MIX_TARGET=surface_rt`
-  * Install dependencies with `mix deps.get`
-  * Create firmware with `mix firmware`. The first build also builds the
-    Nerves system with Buildroot, in Docker on macOS, which takes a while.
+  * Install dependencies with `mix deps.get`. This gets the released
+    system (`v0.2.0`) and downloads its prebuilt system artifact (about
+    200 MB), so you don't need to build the system yourself.
+  * Create firmware with `mix firmware`
   * Update a Surface RT that's on your network with `mix upload nerves.local`
 
 The Erlang and Elixir versions in `.tool-versions` must match the system's
@@ -62,6 +58,22 @@ or set it at the IEx prompt on the Surface RT, which saves it on the device:
 ```elixir
 VintageNetWiFi.quick_configure("MyNetwork", "secret")
 ```
+
+### Developing the system
+
+To test changes to
+[nerves_system_surface_rt](https://github.com/CoderDennis/nerves_system_surface_rt)
+before they're released, point `SURFACE_RT_SYSTEM_PATH` at a local checkout
+of it:
+
+```sh
+export SURFACE_RT_SYSTEM_PATH=../nerves_system_surface_rt
+MIX_TARGET=surface_rt mix deps.get
+MIX_TARGET=surface_rt mix firmware
+```
+
+The system is then built from source with Buildroot (in Docker on macOS)
+whenever it changes. The first build takes a while.
 
 ## Battery status
 
