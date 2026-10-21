@@ -47,8 +47,10 @@ defmodule NervesSurfaceRtHello.MixProject do
       {:nerves_pack, "~> 0.7.1", targets: @all_targets},
 
       # Dependencies for specific targets
-      # The Surface RT system isn't published, so use the local checkout.
-      # `compile: true` builds it (in Docker on macOS) when it changes.
+      # Use the local checkout of the system next to this repo, to test
+      # system changes before they're released. `compile: true` builds it
+      # (in Docker on macOS) when it changes. To use a release instead:
+      # github: "CoderDennis/nerves_system_surface_rt", tag: "v0.2.0"
       {:nerves_system_surface_rt,
        path: "../nerves_system_surface_rt",
        runtime: false,
