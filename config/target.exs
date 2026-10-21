@@ -47,6 +47,9 @@ if keys == [],
 config :nerves_ssh,
   authorized_keys: Enum.map(keys, &File.read!/1)
 
+# Show the battery level in the message of the day (IEx and SSH login)
+config :nerves_motd, extra_rows: {NervesSurfaceRtHello.Battery, :motd_rows, []}
+
 # Configure the network using vintage_net
 #
 # Update regulatory_domain to your 2-letter country code E.g., "US"
