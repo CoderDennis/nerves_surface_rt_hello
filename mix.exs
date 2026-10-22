@@ -52,18 +52,14 @@ defmodule NervesSurfaceRtHello.MixProject do
     ]
   end
 
-  # The released Surface RT system, which comes with a prebuilt system
-  # artifact. To test system changes before they're released, set
+  # The released Surface RT system from Hex, which comes with a prebuilt
+  # system artifact. To test system changes before they're released, set
   # SURFACE_RT_SYSTEM_PATH to a local checkout of the system. It's then
   # built from source (in Docker on macOS) whenever it changes.
   defp system_dep do
     case System.get_env("SURFACE_RT_SYSTEM_PATH") do
       nil ->
-        {:nerves_system_surface_rt,
-         github: "CoderDennis/nerves_system_surface_rt",
-         tag: "v0.2.1",
-         runtime: false,
-         targets: :surface_rt}
+        {:nerves_system_surface_rt, "~> 0.2.1", runtime: false, targets: :surface_rt}
 
       path ->
         {:nerves_system_surface_rt,

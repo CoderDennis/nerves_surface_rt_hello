@@ -34,7 +34,7 @@ cd nerves_surface_rt_hello
   * `export MIX_TARGET=surface_rt`, or prefix every command with
     `MIX_TARGET=surface_rt`
   * Install dependencies with `mix deps.get`. This gets the released
-    system (`v0.2.1`) and downloads its prebuilt system artifact (about
+    system from Hex (0.2.1) and downloads its prebuilt system artifact (about
     200 MB), so you don't need to build the system yourself.
   * Create firmware with `mix firmware`
   * Update a Surface RT that's on your network with `mix upload nerves.local`
