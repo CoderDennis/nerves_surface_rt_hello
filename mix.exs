@@ -61,7 +61,7 @@ defmodule NervesSurfaceRtHello.MixProject do
       nil ->
         {:nerves_system_surface_rt,
          github: "CoderDennis/nerves_system_surface_rt",
-         tag: "v0.2.0",
+         tag: "v0.2.1",
          runtime: false,
          targets: :surface_rt}
 
